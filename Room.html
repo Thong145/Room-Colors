@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>My Room</title>
+<meta name="viewport" content="width=width-device,initial-scale =1" />
+<link rel="stylesheet" 
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<link rel="stylesheet" type="text/css" href="./css/room.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.js" ></script>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+    }
+    body{
+        scroll-behavior: smooth;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #2c2c2c;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    h2{
+        margin-left: -400px;
+        text-align: center;
+       display: inline-block;
+       cursor:pointer;
+        align-items: center;
+       background:grey;
+       color:#E59866;
+       border:currentColor 0.125em solid;
+       padding:0.25em 1em;
+       border-radius: 0.25em;
+       text-decoration: none;
+       text-shadow: 0 0 0.125em white,
+       0 0 0.5em currentColor;
+       box-shadow: inset 0 0 1em 0 #E59866,
+       0 0 0.5em 0 #E59866;
+   }
+   h2::before{
+       
+       content:"";
+       background: #E59866;
+       top:100px;
+       left:150px;
+       width:100px;
+       height:100px;
+       transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+       filter:blur(2em);
+   }
+
+   .cube{
+	position: relative;
+	width: 300px;
+	height: 300px;
+	transform: rotateX(-30deg) ;
+  	transform-style: preserve-3d;
+	animation: animate 5s linear infinite;
+	left:100px;
+}
+.left{
+	left:0;
+	top:0;
+	transform-origin:left;
+	transform: rotateY(90deg);
+	background: linear-gradient(90deg,#222,#FFD700);
+}
+.right{
+	right:0;
+	top:0;
+	transform-origin:right;
+	background: linear-gradient(-90deg,#222,#FFD700);
+	transform: rotateY(-90deg);
+}
+.front{
+	right:0;
+	top:0;
+	transform-origin:top;
+	background: linear-gradient(180deg,#222,#FFD700);
+	transform: rotateX(-90deg);
+}
+.back{
+	right:0;
+	bottom:0;
+	transform-origin:bottom;
+	background: linear-gradient(0deg,#222,#FFD700);
+	transform: rotateX(90deg);
+}
+.top{
+	position: absolute;
+	top :0px;
+	left:0px;
+	width: 300px;
+	height: 300px;
+	background: #999;
+	transform: rotateX(0deg) rotateZ(-300deg) rotateY(90px);
+}
+.bottom{
+	background:#FFD700bf;
+	width:300px;
+	height:300px;
+	left:12px;
+	top:12px;
+	transform: translateY(75%) rotateX(90deg) translateY(-50%);
+	filter:blur(30px);
+	box-shadow:0 0 260px 70px #FFD700bf,
+	0 0 260px rgba(255, 203, 0,0.4),
+	0 0 260px rgba(255, 203, 0,0.8),
+	0 0 260px rgba(255, 203, 0,1);
+}
+.cube> div{
+	position: absolute;
+	top: 100px;
+	left: -50px;
+	width: 100%;
+	height: 100%;
+	transform-style: preserve-3d;
+	background: linear-gradient(#000,#FFD700);
+}
+
+.fa-sun{
+	width:90px;
+	display: inline-block;
+	cursor:pointer;
+ 	align-items: center;
+	border:currentColor 0.125em solid;
+	padding:0.25em 1em;
+	box-shadow: inset 0 0 2em 0 #ff00ff,
+	0 0 1em 0 #ff00ff;
+}
+
+.fa-moon{
+	width:90px;
+	display: inline-block;
+	cursor:pointer;
+ 	align-items: center;
+	border:currentColor 0.125em solid;
+	padding:0.25em 1em;
+	box-shadow: inset 0 0 2em 0 #88f7d6,
+	0 0 1em 0 #98f8f0;
+}
+    .cube1{
+        position: relative;
+        width: 300px;
+        height: 300px;
+        transform: rotateX(-30deg) ;
+          transform-style: preserve-3d;
+        animation: animate 5s linear infinite;
+        left:500px;
+    }
+    .left1{
+        left:0;
+        top:0;
+        transform-origin:left;
+        transform: rotateY(90deg);
+        background: linear-gradient(90deg,#222,#00e7ff);
+    }
+    .right1{
+        right:0;
+        top:0;
+        transform-origin:right;
+        background: linear-gradient(-90deg,#222,#00e7ff);
+        transform: rotateY(-90deg);
+    }
+    .front1{
+        right:0;
+        top:0;
+        transform-origin:top;
+        background: linear-gradient(180deg,#222,#00e7ff);
+        transform: rotateX(-90deg);
+    }
+    .back1{
+        right:0;
+        bottom:0;
+        transform-origin:bottom;
+        background: linear-gradient(0deg,#222,#00e7ff);
+        transform: rotateX(90deg);
+    }
+    .top1{
+        position: absolute;
+        top :0px;
+        left:0px;
+        width: 300px;
+        height: 300px;
+        background: #999;
+        transform: rotateX(0deg) rotateZ(-300deg) rotateY(90px);
+    }
+    .bottom1{
+        background:#00e7ffbf;
+        width:300px;
+        height:300px;
+        left:12px;
+        top:12px;
+        transform: translateY(75%) rotateX(90deg) translateY(-50%);
+        filter:blur(30px);
+        box-shadow:0 0 260px 70px #00e7ffbf,
+        0 0 260px rgba(0,250,230,0.4),
+        0 0 260px rgba(0,250,230,0.8),
+        0 0 260px rgba(0,250,230,1);
+    }
+    
+    .cube2{
+        position: relative;
+        width: 300px;
+        height: 300px;
+        transform: rotateX(-30deg) ;
+          transform-style: preserve-3d;
+        animation: animate 5s linear infinite;
+        left:-300px;
+        top: -300px;
+    }
+    .left2{
+        left:0;
+        top:0;
+        transform-origin:left;
+        transform: rotateY(90deg);
+        background: linear-gradient(90deg,#222,#FF0000);
+    }
+    .right2{
+        right:0;
+        top:0;
+        transform-origin:right;
+        background: linear-gradient(-90deg,#222,#FF0000);
+        transform: rotateY(-90deg);
+    }
+    .front2{
+        right:0;
+        top:0;
+        transform-origin:top;
+        background: linear-gradient(180deg,#222,#FF0000);
+        transform: rotateX(-90deg);
+    }
+    .back2{
+        right:0;
+        bottom:0;
+        transform-origin:bottom;
+        background: linear-gradient(0deg,#222,#FF0000);
+        transform: rotateX(90deg);
+    }
+    .top2{
+        position: absolute;
+        top :0px;
+        left:0px;
+        width: 300px;
+        height: 300px;
+        background: #999;
+        transform: rotateX(0deg) rotateZ(-300deg) rotateY(90px);
+    }
+    .bottom2{
+        background:#FF0000bf;
+        width:300px;
+        height:300px;
+        left:12px;
+        top:12px;
+        transform: translateY(75%) rotateX(90deg) translateY(-50%);
+        filter:blur(30px);
+        box-shadow:0 0 260px 70px #FF0000bf,
+        0 0 260px rgba(255, 87, 51,0.4),
+        0 0 260px rgba(255, 87, 51,0.8),
+        0 0 260px rgba(255, 87, 51,1);
+    }
+    .cube3{
+        position: relative;
+        width: 300px;
+        height: 300px;
+        transform: rotateX(-30deg) ;
+          transform-style: preserve-3d;
+        animation: animate 5s linear infinite;
+        left:0px;
+        top: -300px;
+    }
+    .left3{
+        left:0;
+        top:0;
+        transform-origin:left;
+        transform: rotateY(90deg);
+        background: linear-gradient(90deg,#222,#FF00FF);
+    }
+    .right3{
+        right:0;
+        top:0;
+        transform-origin:right;
+        background: linear-gradient(-90deg,#222,#FF00FF);
+        transform: rotateY(-90deg);
+    }
+    .front3{
+        right:0;
+        top:0;
+        transform-origin:top;
+        background: linear-gradient(180deg,#222,#FF00FF);
+        transform: rotateX(-90deg);
+    }
+    .back3{
+        right:0;
+        bottom:0;
+        transform-origin:bottom;
+        background: linear-gradient(0deg,#222,#FF00FF);
+        transform: rotateX(90deg);
+    }
+    .top3{
+        position: absolute;
+        top :0px;
+        left:0px;
+        width: 300px;
+        height: 300px;
+        background: #999;
+        transform: rotateX(0deg) rotateZ(-300deg) rotateY(90px);
+    }
+    .bottom3{
+        background:#FF00FFbf;
+        width:300px;
+        height:300px;
+        left:12px;
+        top:12px;
+        transform: translateY(75%) rotateX(90deg) translateY(-50%);
+        filter:blur(30px);
+        box-shadow:0 0 260px 70px #FF00FFbf,
+        0 0 260px rgba(255, 0, 255,0.4),
+        0 0 260px rgba(255, 0, 255,0.8),
+        0 0 260px rgba(255, 0, 255,1);
+    }
+    
+    @keyframes animate
+    {
+        0%{
+            transform: rotateX(-30deg) rotateY(0deg);
+        }
+    
+        100%{
+            transform: rotateX(-30deg) rotateY(360deg);
+        }
+        
+    }
+    
+    .cube1> div{
+        position: absolute;
+        top: 200px;
+        left: -50px;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        background: linear-gradient(#000,#40e0d0);
+    }
+    .cube2> div{
+        position: absolute;
+        top: 100px;
+        left: -50px;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        background: linear-gradient(#000,#FF0000);
+    }
+    .cube3> div{
+        position: absolute;
+        top: 100px;
+        left: -50px;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        background: linear-gradient(#000,#FF00FF);
+    }
+    
+    
+    
+     .details {
+     list-style: none;
+     }
+     
+    
+    h5,p{
+        color: white;
+    }
+    a{
+        display: inline-block;
+        cursor:pointer;
+         align-items: center;
+        border:currentColor 0.125em solid;
+        padding:0.25em 1em;
+        box-shadow: inset 0 0 2em 0 #76c5e7,
+        0 0 1em 0 #76c5e7;
+    }
+    
+    
+    .fa-wind{
+        width:90px;
+        display: inline-block;
+        cursor:pointer;
+         align-items: center;
+        border:currentColor 0.125em solid;
+        padding:0.25em 1em;
+        box-shadow: inset 0 0 2em 0 #d3fcf0,
+        0 0 1em 0 #d3fcf0;
+    }
+    .backend{
+        align-items: center;
+        width:200px;
+        height:200px;
+    }
+</style>
+
+</head>
+<body>
+    <div class="header">
+        <h2>ROOM COLORS </h2>
+         <div class="container">
+         
+         <div class = "cube">
+            <div class = "left"></div>
+            <div class = "right"></div>
+            <div class = "front"></div>
+            <div class = "back"></div>
+            <div class = "top"></div>
+            <div class = "bottom"></div>
+            
+        </div>
+            <div class = "cube1">
+                <div class = "left1"></div>
+                <div class = "right1"></div>
+                <div class = "front1"></div>
+                <div class = "back1"></div>
+                <div class = "top1"></div>
+                <div class = "bottom1"></div>
+            
+            </div>
+            <div class = "cube2">
+                <div class = "left2"></div>
+                <div class = "right2"></div>
+                <div class = "front2"></div>
+                <div class = "back2"></div>
+                <div class = "top2"></div>
+                <div class = "bottom2"></div>
+            
+            </div>
+            <div class = "cube3">
+                <div class = "left3"></div>
+                <div class = "right3"></div>
+                <div class = "front3"></div>
+                <div class = "back3"></div>
+                <div class = "top3"></div>
+                <div class = "bottom3"></div>
+            
+            </div>
+         </div>
+        </div>
+        <div class="main">
+        <div class="container">
+         <div id="result" class="row">
+         
+         </div>
+        </div>
+        </div>
+        <div class="footer">
+         <div class="container">
+         
+         </div>
+        </div>
+
+<!-- <script>
+ $(document).ready(function(){
+	 
+ loadRooms();
+
+ function loadRooms(){
+	 $.ajax({
+	 type:'GET',
+	 contentType: "application/json",
+	 dataType: 'json',
+	 url: 'http://localhost:8080/CaiThienDiem/rooms',
+	 success: function(data){
+	 var str="";
+	 $.each(data, function(i, item){
+	
+	 str+='<div class="col-md-4 device">';
+	 str+='<img class="img-thumbnail" src="./images/'+item.image+'"/>';
+	 str+='<h5>'+item.name+'</h5>';
+	 str+='<p>'+item.description+'</p>';
+	 str+='<ul class="details">';
+	 str+='<li>';
+	 str+='<span style="font-size: 30px; color: pink;">';
+	 str+='<i class="fas fa-temperature-high"></i> 27';
+	 str+='</span>';
+	
+	 str+='<li>';
+	 str+='<span style="font-size: 32px; color: yellow;">';
+	 str+='<i class="fas fa-water"></i> ';
+	 str+='</span> ';
+	 str+='</li>';
+	 str+='</ul>';
+	 str+='<a href="#" class="btn btn-primary btnsm" >Details</a>';
+	
+	 str+='</div>';
+	 })
+	 console.log(data);
+	 console.log(str);
+	 
+	 $("#result").append(str);
+	
+	 },
+	 error: function(data){
+	 alert("error");
+	 }
+	 })
+ 	}
+ })
+</script> -->
+
+
+</body>
+</html>
